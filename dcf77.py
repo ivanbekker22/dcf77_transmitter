@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 fs = 200e3
 length_signal = 200e3
-bit = 0.1
+bit = 0.2
 fill_imp_time_0 = fs * bit
 fill_imp_time_1 = fs - fill_imp_time_0
 sample_0 = fs * 0.1
@@ -17,7 +17,7 @@ signal_length2 = 0
 minute_sample = np.ones(int(minute_sample))
 
 sample_0 = np.zeros(int(sample_0))
-sample_1 = np.ones(int(fs))
+sample_1 = np.ones(int(fill_imp_time_1))
 
 impulse = np.hstack((sample_0, sample_1))
 
