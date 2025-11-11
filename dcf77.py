@@ -23,7 +23,6 @@ impulse = np.hstack((sample_0, sample_1))
 
 while fill_imp < 60:
     if fill_imp == 0:
-        signal_length1 = 0
         length_signal = 0
         signal_length1 = signal_length1 + length_signal
         signal_length2 = signal_length1 + fill_imp_time_0
