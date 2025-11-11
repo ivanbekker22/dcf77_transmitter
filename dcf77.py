@@ -1,28 +1,43 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-n = np.arange(0, 12e5, 1)
-minute_sample = np.size(n)
-imp = np.ones(minute_sample)
+fs = 200e3
+length_signal = 200e3
+bit = 0.1
+fill_imp_time_0 = fs * bit
+fill_imp_time_1 = fs - fill_imp_time_0
+sample_0 = fs * 0.1
+sample_1 = fs
+minute_sample = fs * 60
+Ts = 1/fs
+fill_imp = 0
+signal_length1 = 0
+signal_length2 = 0
 
-rand_bin = np.random.randint(0, 2, size=1)
+minute_sample = np.ones(int(minute_sample))
 
-step = 0
-i = 0
-fs = 2e5
+sample_0 = np.zeros(int(sample_0))
+sample_1 = np.ones(int(fs))
 
-def null_impulse(bit):
-    if bit == 1:
-        imp[0:10000] = 0
-        imp[200000:220000] = 0
-    if bit == 0:
-        imp[200000:220000] = 0
-        imp[0:10000] = 0
-    return imp
+impulse = np.hstack((sample_0, sample_1))
 
-null_impulse(bit = rand_bin[0])
+while fill_imp < 60:
+    if fill_imp == 0:
+        signal_length1 = 0
+        length_signal = 0
+        signal_length1 = signal_length1 + length_signal
+        signal_length2 = signal_length1 + fill_imp_time_0
+        minute_sample[int(signal_length1):int(signal_length2)] = 0
+        fill_imp += 1
+    else:
+        length_signal = 200e3
+        signal_length1 = signal_length1 + length_signal
+        signal_length2 = signal_length1 + fill_imp_time_0
+        minute_sample[int(signal_length1):int(signal_length2)] = 0
+        fill_imp += 1
 
-plt.plot(n, imp)
+print(minute_sample)
+plt.plot(minute_sample)
 plt.grid(True)
 plt.show()
 
