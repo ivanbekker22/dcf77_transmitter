@@ -20,14 +20,14 @@ minute_sample_bits = np.ones(int(minute_sample_bits))
 sample_0 = np.zeros(int(sample_0))
 sample_1 = np.ones(int(fill_imp_time_1))
 impulse = np.hstack((sample_0, sample_1))
+t = np.linspace(0, 60, int(fs * 60), endpoint=False)
 
 while fill_imp < 60:
         signal_length1 = signal_length1 + length_signal
         signal_length2 = signal_length1 + fill_imp_time_0
-        minute_sample_bits[int(signal_length1):int(signal_length2)] = 0
+        minute_sample_bits[int(signal_length1):int(signal_length2)] = 0.15
         fill_imp += 1
 
-t = np.linspace(0, 60, int(fs * 60), endpoint=False)
 out = minute_sample_bits * np.sin(2 * np.pi * freq * t) * (2**15 - 1)
 
 # Save to WAV file
